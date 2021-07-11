@@ -1,0 +1,23 @@
+sample = readtable("E:\article\Original Data\sample.xlsx")
+%%%dealing with test variable
+k=unique(sample.test);
+dummy_varibale=[];
+variable=sample.test;
+for i=1:length(k)
+    dummy_variable(:,i)=double(ismember(variable,k(i)));
+end
+k=cellstr(k);
+rs=array2table(dummy_variable,'VariableNames',k);
+Data=[sample rs]
+%%%dealing with connector variable
+m=unique(Data.connector);
+dummy_varibale=[];
+variable=Data.connector;
+for i=1:length(m)
+    dummy_variable(:,i)=double(ismember(variable,m(i)));
+end
+m=cellstr(m);
+es=array2table(dummy_variable,'VariableNames',m);
+Data_1=[Data es]
+
+T = removevars(Data_1,{'test','connector'})
